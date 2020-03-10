@@ -1,4 +1,4 @@
-let canvas = document.getElementById('qr-canvas');
+let qrCanvas = document.getElementById('qr-canvas');
 let qrLinkEl = document.getElementById('qr-link-input');
 
 let state = {
@@ -11,8 +11,11 @@ function render() {
     'color': { 'light': '#FFF0' },
     'width': 600
   };
-  QRCode.toCanvas(canvas, state.qrLink, qrOpts, (error) => {
-    if (error) console.error(error)
+  QRCode.toCanvas(qrCanvas, state.qrLink, qrOpts, (error) => {
+    if (error) {
+      console.error(error)
+      qrCanvas.getContext('2d').clearRect(0, 0, qrCanvas.width, qrCanvas.height);
+    }
     console.log('success!');
   })
 }
